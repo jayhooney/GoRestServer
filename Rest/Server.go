@@ -6,6 +6,4 @@ import (
 
 func Start() {
 	fmt.Println("Server Start")
-
-	"git test" "git test"
 }
