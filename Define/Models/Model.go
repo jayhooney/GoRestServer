@@ -1,12 +1,12 @@
 package models
 
-type Topic struct {
-	DOCID int
-	TERMS string
+type UserInfo struct {
+	ID   int
+	Name string
 }
 
-type Emotion struct {
-	Seq     int
-	CmtID   string
-	Emotion string
+type Skills struct {
+	Seq  int
+	Type string
+	Name string
 }
