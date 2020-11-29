@@ -1,9 +1,17 @@
-package rest
+package server
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
 )
 
-func Start() {
-	fmt.Println("Server Start")
+func Run() {
+	r := gin.Default()
+
+	r.GET(`/ping`, func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"msg": "pong",
+		})
+	})
+
+	r.Run()
 }
