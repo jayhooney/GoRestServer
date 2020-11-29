@@ -1,17 +1,39 @@
 package server
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 )
 
 func Run() {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET(`/ping`, func(c *gin.Context) {
+	router.GET(`/get`, func(c *gin.Context) {
+		// c.JSON(200, gin.H{
+		// 	"msg": "GET",
+		// })
+		fmt.Printf("GET")
+	})
+
+	router.POST(`/post`, func(c *gin.Context) {
+		// c.JSON(200, gin.H{
+		// 	"msg": "POST",
+		// })
+		fmt.Printf("POST")
+	})
+
+	router.DELETE(`/delete`, func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"msg": "pong",
+			"msg": "DELETE",
 		})
 	})
 
-	r.Run()
+	router.PUT(`/put`, func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"msg": "PUT",
+		})
+	})
+
+	router.Run(":8080")
 }
