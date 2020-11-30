@@ -5,8 +5,14 @@ type UserInfo struct {
 	Name string
 }
 
-type Skills struct {
-	Seq  int
-	Type string
-	Name string
+type AUser struct {
+	UserID int `form:"userId" binding:"required"`
+}
+
+type AddUser struct {
+	UserName string `json:"userName" binding:"required"`
+}
+
+type DeleteUser struct {
+	UserID int `form:"userId" binding:"required"`
 }
