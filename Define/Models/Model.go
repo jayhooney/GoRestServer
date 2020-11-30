@@ -16,3 +16,8 @@ type AddUser struct {
 type DeleteUser struct {
 	UserID int `form:"userId" binding:"required"`
 }
+
+type UpdateUser struct {
+	UserName string `json:"userName" binding:"required"`
+	UserID   int    `json:"userId" binding:"required"`
+}
