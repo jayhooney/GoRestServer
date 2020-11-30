@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"encoding/json"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -17,18 +16,18 @@ func checkErr(err error) {
 	}
 }
 
-func AUserProcess(userID int) string {
+func AUserProcess(item models.AUser) string {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
 	defer db.Close()
 
 	var userName string
-	db.QueryRow(`SELECT USER_NM FROM USER_TB WHERE USER_ID = ?;`, userID).Scan(&userName)
+	db.QueryRow(`SELECT USER_NM FROM USER_TB WHERE USER_ID = ?;`, item.UserID).Scan(&userName)
 
 	return userName
 }
 
-func AllUserDBProcess() string {
+func AllUserDBProcess() []models.UserInfo {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
 	defer db.Close()
@@ -44,18 +43,16 @@ func AllUserDBProcess() string {
 		userSlice = append(userSlice, userInfo)
 	}
 
-	result, _ := json.Marshal(userSlice)
-
-	return string(result)
+	return userSlice
 
 }
 
-func AddUserProcess(userName string) int64 {
+func AddUserProcess(item models.AddUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
 	defer db.Close()
 
-	result, err := db.Exec(`INSERT INTO USER_TB (USER_NM) VALUES (?);`, userName)
+	result, err := db.Exec(`INSERT INTO USER_TB (USER_NM) VALUES (?);`, item.UserName)
 	checkErr(err)
 
 	affectedRows, err := result.LastInsertId()
@@ -65,12 +62,12 @@ func AddUserProcess(userName string) int64 {
 
 }
 
-func DeleteUserProcess(userID int) int64 {
+func DeleteUserProcess(item models.DeleteUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
 	defer db.Close()
 
-	result, err := db.Exec(`DELETE FROM USER_TB WHERE USER_ID = ?;`, userID)
+	result, err := db.Exec(`DELETE FROM USER_TB WHERE USER_ID = ?;`, item.UserID)
 	checkErr(err)
 
 	affectedRow, _ := result.RowsAffected()
@@ -78,13 +75,12 @@ func DeleteUserProcess(userID int) int64 {
 	return affectedRow
 }
 
-func UpdateUserProcess(userName string, userID int) int64 {
-	log.Println(userName)
+func UpdateUserProcess(item models.UpdateUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
 	defer db.Close()
 
-	result, err := db.Exec(`UPDATE USER_TB SET USER_NM = ? WHERE USER_ID = ?;`, userName, userID)
+	result, err := db.Exec(`UPDATE USER_TB SET USER_NM = ? WHERE USER_ID = ?;`, item.UserName, item.UserID)
 	checkErr(err)
 
 	affectedRows, err := result.RowsAffected()

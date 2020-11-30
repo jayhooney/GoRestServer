@@ -11,7 +11,7 @@ import (
 func aUserReqeust(c *gin.Context) {
 	var requestQuery models.AUser
 	c.ShouldBindQuery(&requestQuery)
-	result := database.AUserProcess(requestQuery.UserID)
+	result := database.AUserProcess(requestQuery)
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": result,
@@ -31,7 +31,7 @@ func addUserReqeust(c *gin.Context) {
 	var requestjson models.AddUser
 	c.ShouldBindJSON(&requestjson)
 
-	result := database.AddUserProcess(requestjson.UserName)
+	result := database.AddUserProcess(requestjson)
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": result,
@@ -42,7 +42,7 @@ func deleteUserReqeust(c *gin.Context) {
 	var requestQuery models.DeleteUser
 	c.ShouldBindQuery(&requestQuery)
 
-	result := database.DeleteUserProcess(requestQuery.UserID)
+	result := database.DeleteUserProcess(requestQuery)
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": result,
@@ -53,7 +53,7 @@ func updateUserReqeust(c *gin.Context) {
 	var requestBody models.UpdateUser
 	c.ShouldBindJSON(&requestBody)
 
-	result := database.UpdateUserProcess(requestBody.UserName, requestBody.UserID)
+	result := database.UpdateUserProcess(requestBody)
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": result,
