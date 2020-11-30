@@ -10,12 +10,12 @@ POST http://127.0.0.1:8080/addUser HTTP/1.1
 Content-Type: application/json
 
 {
-    "userName":"고린이"
+    "userName":"합격"
 }
 
 ###
 
-DELETE http://127.0.0.1:8080/deleteUser?userId=9 HTTP/1.1
+DELETE http://127.0.0.1:8080/deleteUser?userId=34 HTTP/1.1
 
 ###
 
@@ -23,6 +23,6 @@ PUT http://127.0.0.1:8080/updateUser HTTP/1.1
 Content-Type: application/json
 
 {
-    "userName":"고쟁이",
-    "userId":33
+    "userName":"할수있다.이재훈.",
+    "userId":1
 }
