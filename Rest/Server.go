@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 
 	models "../Define/Models"
@@ -51,7 +50,14 @@ func deleteUserReqeust(c *gin.Context) {
 }
 
 func updateUserReqeust(c *gin.Context) {
-	fmt.Printf("PUT")
+	var requestBody models.UpdateUser
+	c.ShouldBindJSON(&requestBody)
+
+	result := database.UpdateUserProcess(requestBody.UserName, requestBody.UserID)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": result,
+	})
 }
 
 func Run() {

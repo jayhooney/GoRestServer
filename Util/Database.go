@@ -77,3 +77,19 @@ func DeleteUserProcess(userID int) int64 {
 
 	return affectedRow
 }
+
+func UpdateUserProcess(userName string, userID int) int64 {
+	log.Println(userName)
+	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
+	checkErr(err)
+	defer db.Close()
+
+	result, err := db.Exec(`UPDATE USER_TB SET USER_NM = ? WHERE USER_ID = ?;`, userName, userID)
+	checkErr(err)
+
+	affectedRows, err := result.RowsAffected()
+	checkErr(err)
+
+	return affectedRows
+
+}
