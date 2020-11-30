@@ -8,22 +8,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func response(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusOK, gin.H{
+		"data": data,
+	})
+}
+
 func aUserReqeust(c *gin.Context) {
 	var requestQuery models.AUser
 	c.ShouldBindQuery(&requestQuery)
 	result := database.AUserProcess(requestQuery)
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": result,
-	})
+	response(c, result)
 }
 
 func allUserReqeust(c *gin.Context) {
 	result := database.AllUserDBProcess()
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": result,
-	})
+	response(c, result)
 }
 
 func addUserReqeust(c *gin.Context) {
@@ -33,9 +35,7 @@ func addUserReqeust(c *gin.Context) {
 
 	result := database.AddUserProcess(requestjson)
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": result,
-	})
+	response(c, result)
 }
 
 func deleteUserReqeust(c *gin.Context) {
@@ -44,9 +44,7 @@ func deleteUserReqeust(c *gin.Context) {
 
 	result := database.DeleteUserProcess(requestQuery)
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": result,
-	})
+	response(c, result)
 }
 
 func updateUserReqeust(c *gin.Context) {
@@ -55,9 +53,7 @@ func updateUserReqeust(c *gin.Context) {
 
 	result := database.UpdateUserProcess(requestBody)
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": result,
-	})
+	response(c, result)
 }
 
 func Run() {
