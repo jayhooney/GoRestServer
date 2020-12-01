@@ -30,10 +30,10 @@ func allUserReqeust(c *gin.Context) {
 
 func addUserReqeust(c *gin.Context) {
 
-	var requestjson models.AddUser
+	var requestBody models.AddUser
 	c.ShouldBindJSON(&requestjson)
 
-	result := database.AddUserProcess(requestjson)
+	result := database.AddUserProcess(requestBody)
 
 	response(c, result)
 }
