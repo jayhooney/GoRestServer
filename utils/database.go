@@ -6,8 +6,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	models "../models"
-	secret "../secret"
+	models "models"
+	secret "secret"
 )
 
 func checkErr(err error) {

@@ -3,10 +3,10 @@ package server
 import (
 	"net/http"
 
-	models "../models"
-	database "../utils"
-
 	"github.com/gin-gonic/gin"
+
+	models "models"
+	database "utils"
 )
 
 func response(c *gin.Context, data interface{}) {
