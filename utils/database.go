@@ -17,6 +17,8 @@ func checkErr(err error) {
 	}
 }
 
+// git commit message form test
+
 // AUserProcess returns string
 func AUserProcess(item models.AUser) string {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
