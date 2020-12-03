@@ -57,6 +57,7 @@ func updateUserReqeust(c *gin.Context) {
 	response(c, result)
 }
 
+// Run returns void
 func Run() {
 	router := gin.Default()
 

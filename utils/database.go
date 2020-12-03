@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 
+	// mysql
 	_ "github.com/go-sql-driver/mysql"
 
 	models "models"
@@ -16,6 +17,7 @@ func checkErr(err error) {
 	}
 }
 
+// AUserProcess returns string
 func AUserProcess(item models.AUser) string {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
@@ -27,6 +29,7 @@ func AUserProcess(item models.AUser) string {
 	return userName
 }
 
+// AllUserDBProcess returns  []models.UserInfo
 func AllUserDBProcess() []models.UserInfo {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
@@ -47,6 +50,7 @@ func AllUserDBProcess() []models.UserInfo {
 
 }
 
+// AddUserProcess returns int64
 func AddUserProcess(item models.AddUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
@@ -62,6 +66,7 @@ func AddUserProcess(item models.AddUser) int64 {
 
 }
 
+// DeleteUserProcess returns int64
 func DeleteUserProcess(item models.DeleteUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
@@ -75,6 +80,7 @@ func DeleteUserProcess(item models.DeleteUser) int64 {
 	return affectedRow
 }
 
+// UpdateUserProcess returns int64
 func UpdateUserProcess(item models.UpdateUser) int64 {
 	db, err := sql.Open(secret.GetEngine(), secret.GetDBInfo())
 	checkErr(err)
@@ -87,5 +93,4 @@ func UpdateUserProcess(item models.UpdateUser) int64 {
 	checkErr(err)
 
 	return affectedRows
-
 }
